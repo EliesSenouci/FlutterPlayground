@@ -23,8 +23,23 @@ class MyApp extends StatelessWidget {
   Widget profile() {
     return ListView(
       children: [
-        Image.asset('images/background.png'),
-        primarySection()],
+        Stack(
+          children: [
+            Padding(
+              padding: EdgeInsets.only(bottom: 0),
+              child: Image.asset('images/background.png'),
+            ),
+            Positioned(
+              top: 40,
+              child: CircleAvatar(
+                backgroundImage: AssetImage('images/photo.jpeg'),
+                radius: 40,
+              ),
+            ),
+          ],
+        ),
+        primarySection()
+      ],
     );
   }
 
