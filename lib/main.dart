@@ -7,156 +7,41 @@ import 'package:flutter/material.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-
-  Widget titleSection = Container(
-    padding: const EdgeInsets.all(32),
-    child: Row(
-      children: [
-        Expanded(
-          /*1*/
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              /*2*/
-              Container(
-                padding: const EdgeInsets.only(bottom: 8),
-                child: Text(
-                  'Oeschinen Lake Campground',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              Text(
-                'Kandersteg, Switzerland',
-                style: TextStyle(
-                  color: Colors.grey[500],
-                ),
-              ),
-            ],
-          ),
-        ),
-        Favorite()
-      ],
-    ),
-  );
-
   @override
   Widget build(BuildContext context) {
-
-    Color color = Theme.of(context).primaryColor;
-    Widget buttonSection = Container(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          _buildButtonColumn(color, Icons.call, 'CALL'),
-          _buildButtonColumn(color, Icons.near_me, 'ROUTE'),
-          _buildButtonColumn(color, Icons.share, 'SHARE'),
-        ],
-      ),
-    );
-
-    Widget textSection = Container(
-      padding: const EdgeInsets.all(32),
-      child: Text(
-        'Lake Oeschinen lies at the foot of the Blüemlisalp in the Bernese '
-            'Alps. Situated 1,578 meters above sea level, it is one of the '
-            'larger Alpine Lakes. A gondola ride from Kandersteg, followed by a '
-            'half-hour walk through pastures and pine forest, leads you to the '
-            'lake, which warms to 20 degrees Celsius in the summer. Activities '
-            'enjoyed here include rowing, and riding the summer toboggan run.',
-        softWrap: true
-      ),
-    );
-
     return MaterialApp(
-      title: 'Welcome to Flutter',
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Flutter Layout Demo'),
+          title: Text("Linkedin"),
         ),
-        body: ListView(
-          children: [
-            Image.asset(
-              'images/lake.webp',
-              width: 600,
-              height: 240,
-              fit: BoxFit.cover
-            ),
-            titleSection,
-            buttonSection,
-            textSection
-          ]
-        ),
+        body: profile(),
+        backgroundColor: Colors.white70,
       ),
     );
   }
 
-  Column _buildButtonColumn(Color color, IconData icon, String label) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.center,
+  Widget profile() {
+    return ListView(
       children: [
-        Icon(icon, color: color),
-        Container(
-          margin: const EdgeInsets.only(top: 8),
-          child: Text(
-            label,
-            style: TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.w400,
-              color: color,
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class Favorite extends StatefulWidget {
-  @override
-  _FavoriteState createState() => _FavoriteState();
-}
-
-class _FavoriteState extends State<Favorite> {
-  bool _isFav = false;
-  int _favoriteCount = 41;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Container(
-          padding: EdgeInsets.all(0),
-          child: IconButton(
-            padding: EdgeInsets.all(0),
-            alignment: Alignment.centerRight,
-            icon: (_isFav ? Icon(Icons.star) : Icon(Icons.star_border)),
-            color: Colors.red[500],
-            onPressed: _toggleFavorite,
-          ),
-        ),
-        SizedBox(
-          width: 18,
-          child: Container(
-            child: Text('$_favoriteCount'),
-          ),
-        ),
-      ],
+        Image.asset('images/background.png'),
+        primarySection()],
     );
   }
 
-  void _toggleFavorite() {
-    setState(() {
-      if (_isFav) {
-        _favoriteCount -= 1;
-        _isFav = false;
-      } else {
-        _favoriteCount += 1;
-        _isFav = true;
-      }
-    });
+  Widget primarySection() {
+    return Container(
+      color: Colors.white,
+      padding: const EdgeInsets.all(15.0),
+      child: Column(children: [
+        Text("Elies Senouci",
+            style: TextStyle(fontSize: 25, fontWeight: FontWeight.w400)),
+        SizedBox(height: 3),
+        Text("Développeur Java", style: TextStyle(fontSize: 18)),
+        SizedBox(height: 3),
+        Text("Jobijoba - EPITECH"),
+        SizedBox(height: 3),
+        Text("Bordeaux, Nouvelle-Aquitaine, France")
+      ], crossAxisAlignment: CrossAxisAlignment.start),
+    );
   }
 }
