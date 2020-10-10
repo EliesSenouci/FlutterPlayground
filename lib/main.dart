@@ -2,7 +2,6 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
@@ -24,18 +23,7 @@ class MyApp extends StatelessWidget {
   Widget profile() {
     return ListView(
       children: [
-        Stack(
-          children: [
-            Image.asset('images/background.png'),
-            Positioned(
-              top: 50,
-              child: CircleAvatar(
-                backgroundImage: AssetImage('images/photo.jpeg'),
-                radius: 40,
-              ),
-            ),
-          ],
-        ),
+        Image.asset('images/background.png'),
         primarySection(),
         SizedBox(height: 3),
         aboutSection(),
@@ -129,6 +117,7 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
 class StackDemo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
