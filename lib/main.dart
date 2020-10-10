@@ -3,7 +3,6 @@
 // found in the LICENSE file.
 
 import 'package:flutter/material.dart';
-import 'package:english_words/english_words.dart';
 
 void main() => runApp(MyApp());
 
@@ -11,50 +10,86 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Startup name generator',
-      home: RandomWords()
+      title: 'Todo List',
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('Todo List'),
+        ),
+        body: Todolist(),
+      ),
     );
   }
 }
 
-class RandomWords extends StatefulWidget {
+class Todolist extends StatefulWidget {
   @override
-  _RandomWordsState createState() => _RandomWordsState();
+  _TodolistState createState() => _TodolistState();
 }
 
-class _RandomWordsState extends State<RandomWords> {
-  final _suggestions = <WordPair>[];
-  final _biggerFont = TextStyle(fontSize: 18.0);
+class _TodolistState extends State<Todolist> {
+
+  List<String> todos = List<String>();
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Startup Name Generator'),
-      ),
-      body: _buildSuggestions(),
-    );  }
-
-  Widget _buildSuggestions() {
-    return ListView.builder(
-        padding: EdgeInsets.all(16.0),
-        itemBuilder: (context, i) {
-          if (i.isOdd) return Divider();
-
-          final index = i ~/ 2;
-          if (index >= _suggestions.length) {
-            _suggestions.addAll(generateWordPairs().take(10));
-          }
-          return _buildRow(_suggestions[index]);
-        });
-  }
-
-  Widget _buildRow(WordPair pair) {
-    return ListTile(
-      title: Text(
-        pair.asPascalCase,
-        style: _biggerFont,
+    return Container(
+      margin: EdgeInsets.all(15),
+      child: ListView(
+        children: [
+          Text(
+            "TO DO",
+            style:
+                TextStyle(fontWeight: FontWeight.bold, color: Colors.blueGrey),
+          ),
+          Todo(text: "Be good at Flutter"),
+        ],
       ),
     );
+  }
+}
+
+class Todo extends StatefulWidget {
+  final String text;
+
+  const Todo ({ Key key, this.text }): super(key: key);
+
+  @override
+  _TodoState createState() => _TodoState();
+}
+
+class _TodoState extends State<Todo> {
+  bool done = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return (Card(
+      margin: EdgeInsets.only(top: 15),
+      child: Container(
+        padding: EdgeInsets.all(15),
+        child: Row(
+          children: [
+            IconButton(
+              icon: Icon(
+                done ? Icons.check_box_outlined : Icons.check_box_outline_blank,
+                size: 35,
+                color: Colors.blueGrey,
+              ),
+              onPressed: () {
+                setState(() {
+                  done = !done;
+                });
+              },
+            ),
+            SizedBox(
+              width: 10,
+            ),
+            Text(
+              widget.text,
+              style: TextStyle(fontSize: 18),
+            ),
+          ],
+        ),
+      ),
+    ));
   }
 }
